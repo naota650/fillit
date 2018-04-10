@@ -22,14 +22,14 @@ int		ft_mapsize(int piece)
 	return (i);
 }
 
-void	ft_builder(char *array, int size)
+void	ft_builder(char *array)
 {
 	int x;
 
 	x = -1;
-	while (++x < (size * (size + 1)))
+	while (++x < (g_size * (g_size + 1)))
 	{
-		if (x % (size + 1) == size)
+		if (x % (g_size + 1) == g_size)
 			array[x] = '\n';
 		else
 			array[x] = '.';
@@ -58,17 +58,16 @@ char	ft_currentpiece(char *str)
 	return (0);
 }
 
-void	ft_gridmaker(char *array, char **new, int size, int piece)
+void	ft_gridmaker(char *array, char **new, int piece)
 {
-	ft_builder(array, size);
-	while (ft_solvetet(array, new, size, piece) != 1)
+	ft_builder(array);
+	while (ft_solvetet(array, new, piece) != 1)
 	{
 		free(array);
-		size++;
-		array = ft_strnew(size * (size + 1));
-		ft_builder(array, size);
+		g_size++;
+		array = ft_strnew(g_size * (g_size + 1));
+		ft_builder(array);
 	}
 	ft_putstr(array);
 	free(array);
 }
-

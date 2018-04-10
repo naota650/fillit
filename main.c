@@ -36,7 +36,6 @@ char	*ft_opener(char *rf)
 int		main(int ac, char **av)
 {
 	int		piece;
-	int		size;
 	char	*grid;
 	char	**new;
 	char	*array;
@@ -47,9 +46,9 @@ int		main(int ac, char **av)
 	{
 		grid = ft_opener(av[1]);
 		new = ft_splitter(grid, &piece);
-		size = ft_mapsize(piece);
-		array = ft_strnew(size * (size + 1));
-		ft_gridmaker(array, new, size, piece);
+		g_size = ft_mapsize(piece);
+		array = ft_strnew(g_size * (g_size + 1));
+		ft_gridmaker(array, new, piece);
 		ft_putchar('\n');
 	}
 	else
@@ -60,4 +59,3 @@ int		main(int ac, char **av)
 	}
 	return (0);
 }
-

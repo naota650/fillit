@@ -30,13 +30,76 @@ t_list	*read_tetris(int fd)
 t_etris	*get_piece(char *str, char value)
 {
 
-	t_etris *tetris;
+	t_etris	*tetris;
+	char 	**grid;
+	t_point	*min;
+	t_point	*max;
 
+	grid = read_mino(str);
+	tetris = tetris_new(grid, min, max, value);
 	return (tetris);
 }
 
-t_map *create_map()
+t_point	*get_min(char **grid)
 {
+	t_point min;
+	int x;
+	int y;
+
+	min = ft_memalloc(sizeof(t_point));
+	x = 0;
+	y = 0;
+	while (grid[x])
+	{
+		while (grid[x][y])
+		{
+			if (grid[x][y] == '#' && x < min->x || y < min->y)
+			{
+				min->x = x;
+				min->y = y;
+			}
+			if (y == 4)
+				y = 0;
+			else
+				y++;
+		}
+		x++;
+	}	
+	return (min);
+}
+
+t_point *get_max(char **grid)
+{
+	t_point max;
+	int x;
+	int y;
+
+	max = ft_memalloc(sizeof(t_point));
+	x = 0;
+	y = 0;
+	while (grid[x])
+	{
+		while (grid[x][y])
+		{
+			if (grid[x][y] == '#' && x > max->x || y > max->y)
+			{
+				min->x = x;
+				min->y = y;
+			}
+			if (y == 4)
+				y = 0;
+			else
+				y++;
+		}
+		x++;
+	}
+	return (max);
+
+t_map *create_map(int n)
+{
+	int min;
+	
+	min = ft_sqrt(n * 4);
 	//create blank map based on number of tetriminos read
 }
 
